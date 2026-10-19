@@ -1,6 +1,16 @@
 # File Sorter implementation plan
 
-Status: proposed design; no application functionality is implemented yet.
+Status: implemented initial release. This document retains the original design below; the current implementation, verification evidence, and exact file/function inventory are in `DOCUMENTATION.md`.
+
+## Implementation decisions and remaining release gates
+
+The Python/FastAPI service, SQLite journal, same-origin web interface, rule editor, directory browser, asynchronous preview, collision handling, template renaming, Windows file moves, cancellation, history, and conservative interruption recovery are implemented. The API and security middleware are kept together in `app.py`; scanning lives in `planner.py`; these small modules replace the proposed separate `api.py`, `security.py`, and `scanner.py` files. JSON metadata records plus separate action rows implement the planned storage model.
+
+Windows same-volume moves use `SetFileInformationByHandle` with a no-replace rename while the source is held against concurrent writing/deletion. Cross-volume copying uses a locked source, verified temporary output, no-clobber publication, and deletion of the exact source handle. Non-Windows transfers conservatively retain the original and report that outcome instead of claiming a safe destructive move without mandatory locking.
+
+Recovery annotates uncertain operations and preserves all associated files for review; automatic cleanup/replay is intentionally omitted. Folder roots are supplied on every CLI launch, not modified through the browser. Rename dates use the computer's local date. Paths over 240 characters are rejected conservatively.
+
+The Windows test suite and browser smoke workflow have been run locally. A real second-volume test is available but requires a second disposable volume. Fresh standard-Python installation, CI platform-matrix execution, and additional network/cloud filesystem validation remain environment-dependent release gates; do not imply they have passed without results. See `DOCUMENTATION.md` for current counts and limitations.
 
 ## 1. Product scope and deployment
 

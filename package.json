@@ -1,0 +1,7 @@
+{
+  "name": "file-sorter-browser-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {"test:e2e": "node tests/e2e/workflow.mjs"},
+  "devDependencies": {"playwright": "1.62.1"}
+}

@@ -1,0 +1,40 @@
+name: Checks
+on: [push, pull_request]
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        python: ['3.11', '3.12']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -r requirements.lock
+      - run: python -m pip install --no-deps -e .
+      - run: python -m pytest -q
+      - run: python tools/document_inventory.py --check
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check src/file_sorter/static/app.js
+      - run: node --check src/file_sorter/static/api.js
+  browser:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements.lock
+      - run: python -m pip install --no-deps .
+      - run: npm ci
+      - run: npx playwright install chromium
+      - run: npm run test:e2e
+        env:
+          BROWSER_CHANNEL: chromium
