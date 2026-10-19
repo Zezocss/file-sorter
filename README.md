@@ -39,7 +39,7 @@ Browse only shows folders inside the roots supplied at startup. Paste an absolut
 - On non-Windows systems, verified copies retain the source because equivalent mandatory locking is not implemented. Results explicitly report `copied_source_retained`; this is not reported as a completed move.
 - Interrupted operations require manual inspection in history. Do not blindly repeat a sort when both source and destination exist. There is no automatic undo or crash replay.
 - Filenames follow Windows restrictions and destination paths are conservatively limited to 240 characters. Use trusted local directories; hostile concurrent directory replacement, network shares, and cloud-provider behavior are outside the tested safety boundary.
-- Real two-volume and clean-machine installation tests remain release checks; details and exact verification evidence are in [DOCUMENTATION.md](DOCUMENTATION.md).
+- Windows/Linux CI and a fresh-install browser test pass. A real second-volume transfer test still requires a second disposable volume; exact verification evidence is in [DOCUMENTATION.md](DOCUMENTATION.md).
 
 ## Development checks
 

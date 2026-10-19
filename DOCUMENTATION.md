@@ -106,7 +106,9 @@ Other statuses: 403 for forbidden roots/origins/session/CSRF, 404 for missing re
 
 The expanded Windows run passed 41 tests with three explicit environment skips. The subsequent targeted API/path regression run passed 6 tests with 2 environment skips, including the newly added background-scan responsiveness test (42 distinct passing tests overall). The 10,000-file read-only preview took 44.56 seconds in this workspace (59.38 seconds for the full run, including fixture setup). The real Edge browser smoke test passed folder browsing, rule persistence, preview/invalidation, sorting, content integrity, history, and responsive layout with no JavaScript errors. A Python wheel was built, installed into an isolated directory, and verified to include the packaged frontend and working CLI help. One upstream Starlette deprecation warning concerns its httpx test adapter; it does not indicate an application test failure.
 
-A real second-volume test exists but requires FILE_SORTER_SECOND_VOLUME. Symbolic-link/junction tests require OS capabilities. A wheel build and local embedded-runtime checks are not a clean-machine installation test. GitHub's Windows/Linux CI matrix provides additional evidence only once a run actually succeeds. There is no promised performance SLA, no verified network/cloud-drive support, and no automatic recovery replay.
+[GitHub Actions run 39292688373](https://github.com/Zezocss/file-sorter/actions/runs/39292688373) passed all five jobs for implementation commit `3a33672`: Windows and Ubuntu with Python 3.11 and 3.12, plus a fresh-package-install Chromium browser workflow on Windows. These jobs verify standard-Python installation, tests, documentation inventory, and JavaScript syntax independently of the bundled local runtime.
+
+A real second-volume test exists but requires FILE_SORTER_SECOND_VOLUME. Symbolic-link/junction tests require OS capabilities. CI runner installation is verified; arbitrary end-user machine configurations and network/cloud filesystems are not. There is no promised performance SLA and no automatic recovery replay.
 
 ## Documentation and contribution contract
 

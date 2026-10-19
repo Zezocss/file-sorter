@@ -10,7 +10,7 @@ Windows same-volume moves use `SetFileInformationByHandle` with a no-replace ren
 
 Recovery annotates uncertain operations and preserves all associated files for review; automatic cleanup/replay is intentionally omitted. Folder roots are supplied on every CLI launch, not modified through the browser. Rename dates use the computer's local date. Paths over 240 characters are rejected conservatively.
 
-The Windows test suite and browser smoke workflow have been run locally. A real second-volume test is available but requires a second disposable volume. Fresh standard-Python installation, CI platform-matrix execution, and additional network/cloud filesystem validation remain environment-dependent release gates; do not imply they have passed without results. See `DOCUMENTATION.md` for current counts and limitations.
+The Windows test suite and browser smoke workflow have been run locally. GitHub Actions verified standard-Python installation and all Windows/Linux Python 3.11/3.12 test jobs, plus a fresh-install Windows Chromium workflow, for implementation commit `3a33672`. A real second-volume test is available but requires a second disposable volume; network/cloud filesystem validation remains outside the verified release scope. See `DOCUMENTATION.md` for evidence and limitations.
 
 ## 1. Product scope and deployment
 
